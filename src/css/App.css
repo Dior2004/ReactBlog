@@ -1,0 +1,381 @@
+.App {
+  width: 100%;
+  min-width: 441px; /*solution for phones*/
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #34495e6b;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #34495e6c;
+  border-radius: 5px;
+}
+
+/* heading */
+
+header {
+  width: 100%;
+  background-color: #34495e;
+  color: #fff;
+}
+
+.wrap {
+  width: 75%;
+  padding: 16px 30px 25px 30px;
+  margin: 0 auto;
+  transition: 0.5s;
+}
+
+header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .wrap i {
+  font-size: 30px;
+  margin-bottom: -9px;
+}
+
+/* navbar */
+
+.Nav {
+  width: 100%;
+  background-color: #34495ecd;
+}
+
+.Nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Nav form {
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  padding: 5px 2px 0 0;
+  border-bottom: 2px solid #eee;
+}
+
+.Nav form input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #eee;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.Nav form input::placeholder {
+  color: #eeeeeeb1;
+}
+
+.Nav form button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #eee;
+  font-size: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+.Nav ul {
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Nav ul li a {
+  padding: 5px 7px 7px 7px;
+  color: #fff;
+  margin: 5px;
+  transition: 0.2s;
+}
+
+.Nav ul li a:hover {
+  background-color: #34495eee;
+  border-radius: 5px;
+}
+
+/* loader */
+
+.loader {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  margin: 0px auto;
+  margin-top: 10px;
+  position: relative;
+  animation: load 1s infinite ease-in-out;
+}
+
+@keyframes load {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+/* main */
+
+.App > main {
+  width: 100%;
+  flex: 1;
+  color: #2c3e50;
+}
+
+.Home .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post_link {
+  color: #2c3e50;
+}
+
+.post {
+  padding: 10px;
+  border: 2px solid #34495e50;
+  border-radius: 10px;
+  box-shadow: 2px 3px 5px #00000008;
+  transition: 0.2s;
+}
+
+.post:hover {
+  scale: 1.008;
+  box-shadow: 2px 2px 7px #00000022;
+}
+
+.post_body {
+  margin: 5px 0;
+}
+
+.post_date {
+  color: #808080d0;
+  font-size: 14px;
+}
+
+.PostPage .post_date {
+  cursor: default;
+}
+
+/* new post */
+
+.NewPost .wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.NewPost .wrap form,
+.EditPost form {
+  max-width: 474px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.NewPost form label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.NewPost form input,
+.NewPost form textarea {
+  width: 100%;
+  padding: 5px 7px 7px 7px;
+  border-radius: 5px;
+  border: 2px solid #34495e50;
+  outline-color: dodgerblue;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 16px;
+}
+
+.NewPost form textarea {
+  height: 200px;
+  resize: none;
+}
+
+.NewPost form textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.NewPost form textarea::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.NewPost form textarea::-webkit-scrollbar-thumb {
+  background: #34495e22;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.NewPost form textarea::-webkit-scrollbar-thumb:hover {
+  background: #34495e33;
+}
+
+.NewPost form .create_post_button {
+  max-width: 100px;
+  padding: 10px 10px 8px 10px;
+  margin-top: 20px;
+  background-color: #4cd1378a;
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  font-size: 16px;
+  cursor: not-allowed;
+  transition: 0.2s;
+}
+
+.create_post_button_okey {
+  max-width: 100px;
+  padding: 10px 10px 8px 10px;
+  margin-top: 20px;
+  background-color: #4cd137;
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.create_post_button_okey:hover {
+  background-color: #4fdc39;
+  box-shadow: 2px 2px 5px #00000022;
+}
+
+/* post view */
+
+.PostPage button,
+.EditPost button {
+  padding: 10px 10px 8px 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.edit_post_button {
+  background-color: #f39c12;
+  cursor: pointer;
+}
+
+.edit_post_button:hover {
+  background-color: #faa113;
+  box-shadow: 2px 2px 5px #00000022;
+}
+
+.edit_button_not_ok {
+  background-color: #f39d128a;
+  cursor: not-allowed;
+}
+
+.delete_post_button {
+  cursor: pointer;
+  margin: 10px 0 0 10px;
+  background-color: #eb3006f7;
+}
+
+.delete_post_button:hover {
+  background-color: #f43308f6;
+  box-shadow: 2px 2px 5px #00000022;
+}
+
+.cancel_post_button {
+  cursor: pointer;
+  margin: 10px 0 0 10px;
+  background-color: #8ea2b7;
+}
+
+.cancel_post_button:hover {
+  background-color: #90a9c3;
+  box-shadow: 2px 2px 5px #00000022;
+}
+
+/* edit post */
+
+.EditPost form textarea {
+  width: 100%;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.EditPost .edit_title {
+  height: 34px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.EditPost .edit_title::placeholder {
+  color: #34495ea5;
+}
+
+.EditPost .edit_body {
+  height: 24px;
+  font-size: 16px;
+}
+
+/* footer */
+
+.Footer {
+  width: 100%;
+  background-color: #34495e;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  padding-bottom: 7px;
+}
+
+/* media */
+
+@media (max-width: 700px) {
+  .wrap {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Home .wrap {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (min-width: 2000px) {
+  .wrap {
+    max-width: 1500px;
+  }
+}
