@@ -4,12 +4,11 @@ import {
   MdOutlineTabletMac,
   MdOutlineLaptopMac,
 } from "react-icons/md";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useStoreState } from "easy-peasy";
 import useWindowSize from "../hooks/useWindowSize"; // importing the custom hook from hooks folder
 
 const Header = () => {
-  const { title } = useContext(DataContext);
+  const title = useStoreState((state) => state.title);
 
   // const useWindowSizeObj = useWindowSize();  // this is a function like we have created in earlier in the hooks directory
   // console.log(useWindowSizeObj); // is an object with width and heigth propertirs like {width: undefined, height: undefined}

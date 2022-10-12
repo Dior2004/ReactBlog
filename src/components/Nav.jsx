@@ -1,12 +1,31 @@
 import { React, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const Nav = () => {
-  const { setTitle, search, setSearch, navigateBack } = useContext(DataContext);
+  const posts = useStoreState((state) => state.posts);
+  const search = useStoreState((state) => state.search);
+  const setSearch = useStoreActions((actions) => actions.setSearch);
+  const setSearchResults = useStoreActions(
+    (actions) => actions.setSearchResults
+  );
+  const setTitle = useStoreActions((actions) => actions.setTitle);
   const location = useLocation();
+  const navigateBack = useNavigate();
+
+  // search function
+
+  useEffect(() => {
+    const filteredSearchResults = posts.filter(
+      (post) =>
+        post.body.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase()) ||
+        post.datetime.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResults(filteredSearchResults.reverse());
+  }, [posts, search, setSearchResults]);
 
   useEffect(() => {
     if (location.pathname === "/post") {

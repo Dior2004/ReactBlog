@@ -1,20 +1,26 @@
-import { React, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { React, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { FiEdit3, FiTrash2 } from "react-icons/fi";
 import { MdOutlineCancel } from "react-icons/md";
 import Loader from "./Loader";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
 import { format } from "date-fns";
-import apiPosts from "../api/posts";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const EditPost = () => {
-  const { posts, setPosts, handleDelete, navigateBack, loader, setFetchError } =
-    useContext(DataContext);
-  const [editTitle, setEditTitle] = useState("");
-  const [editBody, setEditBody] = useState("");
+  const navigateBack = useNavigate();
+
+  const loader = useStoreState((state) => state.loader);
+  const editTitle = useStoreState((state) => state.editTitle);
+  const editBody = useStoreState((state) => state.editBody);
+
+  const editPost = useStoreActions((actions) => actions.editPost); // function that adds new post
+  const setEditTitle = useStoreActions((actions) => actions.setEditTitle); // it is used inside of the form
+  const setEditBody = useStoreActions((actions) => actions.setEditBody); // it is used inside of the form
+  const deletePost = useStoreActions((actions) => actions.deletePost); // delete function
+  const getPostById = useStoreState((state) => state.getPostById);
+
   const { id } = useParams();
-  const postArr = posts.find((post) => post.id.toString() === id);
+  const postArr = getPostById(id);
 
   useEffect(() => {
     if (postArr) {
@@ -25,7 +31,7 @@ const EditPost = () => {
 
   // edit axios CRUD => U == "PATCH" but we use "PUT" instead bcoz we are replaceing the whole array
 
-  const handleEdit = async (id) => {
+  const handleEdit = (id) => {
     if (editBody.trimEnd().length < 3 || editTitle.trimEnd().length < 1) return;
 
     const datetime = format(new Date(), `MMMM dd, yyyy pp`);
@@ -41,33 +47,20 @@ const EditPost = () => {
         .join(" "),
       datetime: datetime,
     };
-
-    try {
-      const oldPost = posts.filter((e) => e.id === id);
-      if (
-        oldPost[0].title.trimEnd() === editTitle.trimEnd() &&
-        oldPost[0].body.trimEnd() === editBody.trimEnd()
-      )
-        return;
-
-      const response = await apiPosts.put(`/posts/${id}`, updatedPost);
-      setPosts(
-        posts.map((post) => (post.id === id ? { ...response.data } : post))
-      ); // mapping through our old array we check if id of our edited post is equal to id we clicked (which comes from our old posts Array). if true we replace that obj with our new updated obj else return olt obj itself
-      // plus it automatically creates a new array instead of we creating by ourselves like [...posts, newSmth] then setState(that array)
-      setEditTitle("");
-      setEditBody("");
-      navigateBack("/");
-    } catch (error) {
-      setFetchError(`Erroe: ${error.message}`);
-      navigateBack("/");
-    }
+    editPost(updatedPost);
+    navigateBack("/");
   };
 
   const handleCancel = (id) => {
     setEditTitle("");
     setEditBody("");
     navigateBack(`/postpage/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    // we dont need async because in easy-peasy store.js we have already used it
+    deletePost(id); // function id is a parameter
+    navigateBack("/");
   };
 
   return (

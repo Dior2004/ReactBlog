@@ -1,11 +1,14 @@
 import React from "react";
 import Feed from "./Feed";
 import Loader from "./Loader";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import MoreTools from "./MoreTools";
+import { useStoreState } from "easy-peasy";
 
 const Home = () => {
-  const { searchResults, search, fetchError, loader } = useContext(DataContext);
+  const searchResults = useStoreState((state) => state.searchResults);
+  const search = useStoreState((state) => state.search);
+  const fetchError = useStoreState((state) => state.fetchError);
+  const loader = useStoreState((state) => state.loader);
 
   return (
     <main className="Home">
@@ -13,7 +16,10 @@ const Home = () => {
         searchResults.length ? (
           loader ? (
             <div className="wrap">
-              <Feed />
+              <div className="container">
+                <Feed />
+              </div>
+              <MoreTools />
             </div>
           ) : (
             <Loader />

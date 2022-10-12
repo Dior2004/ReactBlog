@@ -29,7 +29,7 @@ header {
 
 .wrap {
   width: 75%;
-  padding: 16px 30px 25px 30px;
+  padding: 16px 30px 20px 30px;
   margin: 0 auto;
   transition: 0.5s;
 }
@@ -144,10 +144,53 @@ a {
   color: #2c3e50;
 }
 
+.Home {
+  display: flex;
+  flex-direction: column;
+}
+
 .Home .wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.Home .wrap .container {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: -40px;
+}
+
+.Home .wrap .MoreTools {
+  align-self: flex-end;
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #97a8b9;
+  box-shadow: 2px 2px 10px #00000011;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: -10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.Home .wrap .MoreTools:hover {
+  background-color: #748696;
+  box-shadow: 2px 2px 10px #00000020;
+}
+
+.Home .wrap .MoreTools p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .post_link {
@@ -368,9 +411,14 @@ a {
 }
 
 @media (min-width: 1000px) {
-  .Home .wrap {
+  .Home .wrap .container {
     display: grid;
     grid-template-columns: 50% 50%;
+    margin-bottom: -40px;
+  }
+
+  .Home .wrap .MoreTools {
+    translate: 10px;
   }
 }
 

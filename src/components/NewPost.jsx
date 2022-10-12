@@ -1,20 +1,23 @@
-import { React, useState, useContext } from "react";
+import React from "react";
 import { FiPlus } from "react-icons/fi";
-import DataContext from "../context/DataContext";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { format } from "date-fns";
-import apiPosts from "../api/posts";
+import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
-  const { posts, setPosts, setFetchError, navigateBack } =
-    useContext(DataContext);
-  const [postTitle, setPostTitle] = useState("");
-  const [postBody, setPostBody] = useState("");
+  const navigateBack = useNavigate();
 
-  // CRUD with axios
+  const posts = useStoreState((state) => state.posts);
+  const postTitle = useStoreState((state) => state.postTitle);
+  const postBody = useStoreState((state) => state.postBody);
+
+  const createPost = useStoreActions((actions) => actions.createPost); // function that adds new post
+  const setPostTitle = useStoreActions((actions) => actions.setPostTitle); // it is used inside of the form
+  const setPostBody = useStoreActions((actions) => actions.setPostBody); // it is used inside of the form
 
   //  create post function
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (postBody.length < 3) return;
 
@@ -34,18 +37,8 @@ const NewPost = () => {
         .join(" "),
       datetime: datetime,
     };
-    try {
-      // axios CRUD => CR == "POST"
-      const response = await apiPosts.post("/posts", newPost);
-      const newAllPosts = [...posts, response.data];
-      setPosts(newAllPosts);
-      setPostTitle("");
-      setPostBody("");
-      navigateBack("/");
-    } catch (error) {
-      setFetchError(`Erroe: ${error.message}`);
-      navigateBack("/");
-    }
+    createPost(newPost);
+    navigateBack("/");
   };
 
   return (

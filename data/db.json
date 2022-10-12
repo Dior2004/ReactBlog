@@ -2,51 +2,45 @@
   "posts": [
     {
       "id": 1,
-      "title": "1",
+      "title": "First",
       "body": "this is our first post",
-      "datetime": "October 05, 2022 5:38:51 PM"
+      "datetime": "October 10, 2022 3:37:27 PM"
     },
     {
       "id": 2,
-      "title": "2",
+      "title": "Second",
       "body": "this's our second post",
-      "datetime": "October 05, 2022 5:38:27 PM"
+      "datetime": "October 10, 2022 3:37:13 PM"
     },
     {
       "id": 3,
-      "title": "3",
+      "title": "Third",
       "body": "this is our third post",
-      "datetime": "October 05, 2022 5:38:05 PM"
+      "datetime": "October 10, 2022 3:36:46 PM"
     },
     {
       "id": 4,
-      "title": "4",
+      "title": "Fourth",
       "body": "this is our fourth post",
-      "datetime": "October 05, 2022 5:36:51 PM"
+      "datetime": "October 10, 2022 3:37:00 PM"
     },
     {
       "id": 5,
-      "title": "5",
+      "title": "Fifth",
       "body": "this is our 5th post",
-      "datetime": "October 05, 2022 5:32:56 PM"
+      "datetime": "October 10, 2022 3:35:20 PM"
     },
     {
       "id": 6,
-      "title": "6",
-      "body": "this is our sixth post.",
-      "datetime": "October 09, 2022 9:48:29 AM"
+      "title": "Sixth",
+      "body": "this is our sixth post",
+      "datetime": "October 13, 2022 12:47:35 AM"
     },
     {
       "id": 7,
-      "title": "7",
+      "title": "Seventh",
       "body": "this is our seventh post",
-      "datetime": "October 05, 2022 5:36:20 PM"
-    },
-    {
-      "id": 8,
-      "title": "Test",
-      "body": "Testing if it is working or not now",
-      "datetime": "October 09, 2022 5:21:07 PM"
+      "datetime": "October 13, 2022 12:49:33 AM"
     }
   ]
 }

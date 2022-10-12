@@ -1,21 +1,30 @@
 import React from "react";
 import { FiTrash2, FiEdit3 } from "react-icons/fi";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const PostPage = () => {
-  const { loader, posts, handleDelete } = useContext(DataContext);
+  const deletePost = useStoreActions((actions) => actions.deletePost); // delete function
+  const getPostById = useStoreState((state) => state.getPostById);
+  const loader = useStoreState((state) => state.loader);
+  const navigateBack = useNavigate();
 
   // const id = useParams(); /* useParams gives us an array like {id: "2"} 2 is in string */ and this 2 came from browser's searchbar (localhost:3000/post/{anything})
 
   const { id } = useParams();
   // console.log(id); // typeof string
 
-  const chosenPost = posts.find((post) => post.id.toString() === id);
-  // console.log(chosenPost); // if finds returns that object but if not returns undefined
+  const chosenPost = getPostById(id);
+  // console.log(chosenPost); // we are passing our id from useParams to this getById function
+
+  // delete axios CRUD => D == "DELETE"
+
+  const handleDelete = (id) => {
+    deletePost(id); // function id is a parameter
+    navigateBack("/");
+  };
 
   return (
     <main className="PostPage">
