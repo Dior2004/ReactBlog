@@ -83,18 +83,9 @@ export default createStore({
   // edit post
   editPost: thunk(async (actions, updatedPost, helpers) => {
     const { posts } = helpers.getState(); // should be called induvidually
-    const { editTitle } = helpers.getState();
-    const { editBody } = helpers.getState();
     const { id } = updatedPost; //
 
     try {
-      const oldPost = posts.filter((e) => e.id === id);
-      if (
-        oldPost[0].title.trimEnd() === editTitle.trimEnd() &&
-        oldPost[0].body.trimEnd() === editBody.trimEnd()
-      )
-        return;
-
       const response = await apiPosts.put(`/posts/${id}`, updatedPost);
       actions.setPosts(
         posts.map((post) => (post.id === id ? { ...response.data } : post))

@@ -9,6 +9,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 const EditPost = () => {
   const navigateBack = useNavigate();
 
+  const posts = useStoreState((state) => state.posts);
   const loader = useStoreState((state) => state.loader);
   const editTitle = useStoreState((state) => state.editTitle);
   const editBody = useStoreState((state) => state.editBody);
@@ -31,7 +32,7 @@ const EditPost = () => {
 
   // edit axios CRUD => U == "PATCH" but we use "PUT" instead bcoz we are replaceing the whole array
 
-  const handleEdit = (id) => {
+  const handleEdit = async (id) => {
     if (editBody.trimEnd().length < 3 || editTitle.trimEnd().length < 1) return;
 
     const datetime = format(new Date(), `MMMM dd, yyyy pp`);
@@ -47,6 +48,14 @@ const EditPost = () => {
         .join(" "),
       datetime: datetime,
     };
+
+    const oldPost = posts.filter((e) => e.id === id);
+    if (
+      oldPost[0].title.trimEnd() === editTitle.trimEnd() &&
+      oldPost[0].body.trimEnd() === editBody.trimEnd()
+    )
+      return;
+
     editPost(updatedPost);
     navigateBack("/");
   };
